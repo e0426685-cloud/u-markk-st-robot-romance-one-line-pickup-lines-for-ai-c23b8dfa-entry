@@ -34,6 +34,10 @@ def main():
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(ENTRY)
     os.chmod("/output/entry.txt", 0o644)
+    with open("/output/entry.txt", encoding="utf-8") as f:
+        written = f.read()
+    if written != ENTRY or not validate(written):
+        raise ValueError("entry on disk does not match the validated line")
 
 
 if __name__ == "__main__":
